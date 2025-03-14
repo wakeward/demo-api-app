@@ -1,7 +1,7 @@
 package main
 
 import (
-	"wakeward/demo-api-app/controllers"
+	"github.com/wakeward/demo-api-app/controllers"
 
 	"github.com/gin-gonic/gin"
 )

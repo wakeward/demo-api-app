@@ -33,3 +33,17 @@ updates:
       gomod:
         patterns:
           - "*"
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: "friday"
+      time: "08:00"
+      timezone: Etc/UTC
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      docker:
+        patterns:
+          - "*"

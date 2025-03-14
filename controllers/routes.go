@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	docs "wakeward/demo-api-app/docs"
+	docs "github.com/wakeward/demo-api-app/docs"
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"

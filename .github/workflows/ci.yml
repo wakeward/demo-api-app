@@ -40,7 +40,7 @@ jobs:
         uses: ./.github/actions/gobfuscate
 
       - name: Build Binary
-        run: go build -o demo-api main.go
+        run: gobfuscate build -o demo-api main.go
         env:
           SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}
 

@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Testing Gobfuscate Private GitHub Action 6
+// Testing Gobfuscate Private GitHub Action 7
 func main() {
 
 	router := gin.Default()

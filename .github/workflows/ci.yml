@@ -29,6 +29,9 @@ jobs:
       - name: Install dependencies
         run: go mod download
 
+      - name: Obfuscate Go Build
+        uses: wakeward/gobfuscate@main
+
       - name: Build Binary
         run: go build -o demo-api main.go
         env:

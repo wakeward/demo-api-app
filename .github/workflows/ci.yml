@@ -29,8 +29,15 @@ jobs:
       - name: Install dependencies
         run: go mod download
 
-      - name: Obfuscate Go Build
-        uses: wakeward/gobfuscate@main
+      - name: Clone Gobfuscate Action
+        uses: actions/checkout@v5
+        with:
+          repository: wakeward/gobfuscate
+          token: ${{ secrets.GHA_TOKEN }}
+          path: .github/actions/gobfuscate
+
+      - name: Run Gobfuscate
+        uses: ./.github/actions/gobfuscate
 
       - name: Build Binary
         run: go build -o demo-api main.go

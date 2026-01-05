@@ -25,13 +25,7 @@ jobs:
     executor: docker/docker
     steps:
       - checkout
-      - setup_remote_docker # Required for building images within a job
-      - docker/check:
-          registry: docker.io
-      - docker/build:
-          image: $DOCKER_USERNAME/demo-api-app
-          tag: $CIRCLE_SHA1
-      - docker/push:
+      - docker/publish:
           image: $DOCKER_USERNAME/demo-api-app
           tag: $CIRCLE_SHA1
 

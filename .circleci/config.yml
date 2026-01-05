@@ -6,22 +6,20 @@ orbs:
 
 jobs:
   build-test:
-    docker:
-      - image: cimg/go:1.22 # Using CircleCI's convenience image
+    executor:
+      name: go/default
+      tag: '1.24'
     steps:
       - checkout
-      - go/load-cache # Restores dependencies if they haven't changed
-      - run:
-          name: Install dependencies
-          command: go mod download
-      - go/save-cache
-      - run:
-          name: Build Binary
-          command: go build -o demo-api main.go
-          # Secret environment variables are managed in CircleCI Project Settings
-      - run:
-          name: Run Unit Tests
-          command: go test -v ./...
+      - go/with-cache
+      steps:
+        - go/mod-download
+        - go/test:
+            build_ldflags: "-s -w"
+            packages: ./...
+            failfast: true
+            no_output_timeout: 15m
+            timeout: 15m
 
   docker-build-push:
     executor: docker/docker

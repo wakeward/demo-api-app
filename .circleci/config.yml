@@ -12,14 +12,14 @@ jobs:
     steps:
       - checkout
       - go/with-cache
-        steps:
-          - go/mod-download
-          - go/test:
-              build_ldflags: "-s -w"
-              packages: ./...
-              failfast: true
-              no_output_timeout: 15m
-              timeout: 15m
+          steps:
+            - go/mod-download
+            - go/test:
+                build_ldflags: "-s -w"
+                packages: ./...
+                failfast: true
+                no_output_timeout: 15m
+                timeout: 15m
 
   docker-build-push:
     executor: docker/docker

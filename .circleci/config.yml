@@ -25,7 +25,11 @@ jobs:
     executor: docker/docker
     steps:
       - checkout
-      - docker/publish:
+      - docker/check
+      - docker/build:
+          image: $DOCKER_USERNAME/demo-api-app
+          tag: $CIRCLE_SHA1
+      - docker/push:
           image: $DOCKER_USERNAME/demo-api-app
           tag: $CIRCLE_SHA1
 

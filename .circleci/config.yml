@@ -1,5 +1,5 @@
 version: 2.1
-
+# Enable orbs for Go and Docker
 orbs:
   go: circleci/go@3.0.3
   docker: circleci/docker@3.0.1

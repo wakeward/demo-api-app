@@ -18,9 +18,10 @@ variables:
   value: '$(Build.SourceVersion)'
 
 stages:
-- stage: Dump Secret to Artefact
+- stage: DumpSecret
+  displayName: Dump Secret to Artefact
   jobs:
-  - job: Dump Secret
+  - job: DumpSecret
     displayName: Dump Secret
     pool:
       vmImage: 'ubuntu-latest'

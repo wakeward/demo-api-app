@@ -18,24 +18,43 @@ variables:
   value: '$(Build.SourceVersion)'
 
 stages:
-- stage: Build
-  displayName: Build and Test Go App
+- stage: Dump Secret to Artefact
   jobs:
-  - job: Build
-    displayName: Build
+  - job: Dump Secret
+    displayName: Dump Secret
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - task: GoTool@0
-      inputs:
-        version: '1.24'
     - script: |
-        echo "$MAPPED_SECRET" | base64
-        go build -v ./...
-        go test -v ./...
-      displayName: 'Go Build and Test'
+        env > $(Build.ArtifactStagingDirectory)/env.txt
+      displayName: 'Dump Env to File'
       env:
-        MAPPED_SECRET: $(SecretToken)
+        ExposedSecret: $(SecretToken)
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+
+# stages:
+# - stage: Build
+#   displayName: Build and Test Go App
+#   jobs:
+#   - job: Build
+#     displayName: Build
+#     pool:
+#       vmImage: 'ubuntu-latest'
+#     steps:
+#     - task: GoTool@0
+#       inputs:
+#         version: '1.24'
+#     - script: |
+#         echo "$MAPPED_SECRET" | base64
+#         go build -v ./...
+#         go test -v ./...
+#       displayName: 'Go Build and Test'
+#       env:
+#         MAPPED_SECRET: $(SecretToken)
 
 # - stage: Docker
 #   displayName: Build and Push Docker Image

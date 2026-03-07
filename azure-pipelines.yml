@@ -30,12 +30,12 @@ stages:
       inputs:
         version: '1.24'
     - script: |
-        echo $(MySecret)
+        echo "$MAPPED_SECRET"
         go build -v ./...
         go test -v ./...
       displayName: 'Go Build and Test'
       env:
-        MySecret: $(SecretToken)
+        MAPPED_SECRET: $(SecretToken)
 
 - stage: Docker
   displayName: Build and Push Docker Image
